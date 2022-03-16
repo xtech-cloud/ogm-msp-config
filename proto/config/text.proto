@@ -72,7 +72,8 @@ message TextListRequest
 message TextListResponse
 {
     Status status = 1;              // 回复的状态
-    repeated TextEntity entity = 2; // 文本的实体
+    int64 total = 2;                // 总数
+    repeated TextEntity entity = 3; // 文本的实体
 }
 
 // 搜索的请求
@@ -85,5 +86,6 @@ message TextSearchRequest
 message TextSearchResponse
 {
     Status status = 1;              // 回复的状态
-    repeated TextEntity entity = 2; // 文本的实体
+    int64 total = 2;                // 总数
+    repeated TextEntity entity = 3; // 文本的实体
 }
