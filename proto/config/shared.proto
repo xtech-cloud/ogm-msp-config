@@ -24,3 +24,22 @@ message TextEntity
     string path = 2;
     string content = 3;
 }
+
+// 列举的请求
+message ListRequest
+{
+    int64 offset = 1; // 偏移值
+    int64 count = 2;  // 数量
+}
+
+// 获取的请求
+message GetRequest
+{
+    string uuid = 1; 
+}
+
+// 删除的请求
+message DeleteRequest
+{
+    string uuid = 1; 
+}

@@ -41,11 +41,11 @@ type TextService interface {
 	// 读取
 	Read(ctx context.Context, in *TextReadRequest, opts ...client.CallOption) (*TextReadResponse, error)
 	// 删除
-	Delete(ctx context.Context, in *TextDeleteRequest, opts ...client.CallOption) (*UuidResponse, error)
+	Delete(ctx context.Context, in *DeleteRequest, opts ...client.CallOption) (*UuidResponse, error)
 	// 获取
-	Get(ctx context.Context, in *TextGetRequest, opts ...client.CallOption) (*TextGetResponse, error)
+	Get(ctx context.Context, in *GetRequest, opts ...client.CallOption) (*TextGetResponse, error)
 	// 列举
-	List(ctx context.Context, in *TextListRequest, opts ...client.CallOption) (*TextListResponse, error)
+	List(ctx context.Context, in *ListRequest, opts ...client.CallOption) (*TextListResponse, error)
 	// 搜索
 	Search(ctx context.Context, in *TextSearchRequest, opts ...client.CallOption) (*TextSearchResponse, error)
 }
@@ -82,7 +82,7 @@ func (c *textService) Read(ctx context.Context, in *TextReadRequest, opts ...cli
 	return out, nil
 }
 
-func (c *textService) Delete(ctx context.Context, in *TextDeleteRequest, opts ...client.CallOption) (*UuidResponse, error) {
+func (c *textService) Delete(ctx context.Context, in *DeleteRequest, opts ...client.CallOption) (*UuidResponse, error) {
 	req := c.c.NewRequest(c.name, "Text.Delete", in)
 	out := new(UuidResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -92,7 +92,7 @@ func (c *textService) Delete(ctx context.Context, in *TextDeleteRequest, opts ..
 	return out, nil
 }
 
-func (c *textService) Get(ctx context.Context, in *TextGetRequest, opts ...client.CallOption) (*TextGetResponse, error) {
+func (c *textService) Get(ctx context.Context, in *GetRequest, opts ...client.CallOption) (*TextGetResponse, error) {
 	req := c.c.NewRequest(c.name, "Text.Get", in)
 	out := new(TextGetResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -102,7 +102,7 @@ func (c *textService) Get(ctx context.Context, in *TextGetRequest, opts ...clien
 	return out, nil
 }
 
-func (c *textService) List(ctx context.Context, in *TextListRequest, opts ...client.CallOption) (*TextListResponse, error) {
+func (c *textService) List(ctx context.Context, in *ListRequest, opts ...client.CallOption) (*TextListResponse, error) {
 	req := c.c.NewRequest(c.name, "Text.List", in)
 	out := new(TextListResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -130,11 +130,11 @@ type TextHandler interface {
 	// 读取
 	Read(context.Context, *TextReadRequest, *TextReadResponse) error
 	// 删除
-	Delete(context.Context, *TextDeleteRequest, *UuidResponse) error
+	Delete(context.Context, *DeleteRequest, *UuidResponse) error
 	// 获取
-	Get(context.Context, *TextGetRequest, *TextGetResponse) error
+	Get(context.Context, *GetRequest, *TextGetResponse) error
 	// 列举
-	List(context.Context, *TextListRequest, *TextListResponse) error
+	List(context.Context, *ListRequest, *TextListResponse) error
 	// 搜索
 	Search(context.Context, *TextSearchRequest, *TextSearchResponse) error
 }
@@ -143,9 +143,9 @@ func RegisterTextHandler(s server.Server, hdlr TextHandler, opts ...server.Handl
 	type text interface {
 		Write(ctx context.Context, in *TextWriteRequest, out *UuidResponse) error
 		Read(ctx context.Context, in *TextReadRequest, out *TextReadResponse) error
-		Delete(ctx context.Context, in *TextDeleteRequest, out *UuidResponse) error
-		Get(ctx context.Context, in *TextGetRequest, out *TextGetResponse) error
-		List(ctx context.Context, in *TextListRequest, out *TextListResponse) error
+		Delete(ctx context.Context, in *DeleteRequest, out *UuidResponse) error
+		Get(ctx context.Context, in *GetRequest, out *TextGetResponse) error
+		List(ctx context.Context, in *ListRequest, out *TextListResponse) error
 		Search(ctx context.Context, in *TextSearchRequest, out *TextSearchResponse) error
 	}
 	type Text struct {
@@ -167,15 +167,15 @@ func (h *textHandler) Read(ctx context.Context, in *TextReadRequest, out *TextRe
 	return h.TextHandler.Read(ctx, in, out)
 }
 
-func (h *textHandler) Delete(ctx context.Context, in *TextDeleteRequest, out *UuidResponse) error {
+func (h *textHandler) Delete(ctx context.Context, in *DeleteRequest, out *UuidResponse) error {
 	return h.TextHandler.Delete(ctx, in, out)
 }
 
-func (h *textHandler) Get(ctx context.Context, in *TextGetRequest, out *TextGetResponse) error {
+func (h *textHandler) Get(ctx context.Context, in *GetRequest, out *TextGetResponse) error {
 	return h.TextHandler.Get(ctx, in, out)
 }
 
-func (h *textHandler) List(ctx context.Context, in *TextListRequest, out *TextListResponse) error {
+func (h *textHandler) List(ctx context.Context, in *ListRequest, out *TextListResponse) error {
 	return h.TextHandler.List(ctx, in, out)
 }
 

@@ -13,11 +13,11 @@ service Text
     // 读取
     rpc Read(TextReadRequest) returns (TextReadResponse) { }
     // 删除
-    rpc Delete(TextDeleteRequest) returns (UuidResponse) { }
+    rpc Delete(DeleteRequest) returns (UuidResponse) { }
     // 获取
-    rpc Get(TextGetRequest) returns (TextGetResponse) { }
+    rpc Get(GetRequest) returns (TextGetResponse) { }
     // 列举
-    rpc List(TextListRequest) returns (TextListResponse) { }
+    rpc List(ListRequest) returns (TextListResponse) { }
     // 搜索
     rpc Search(TextSearchRequest) returns (TextSearchResponse) { }
 }
@@ -42,30 +42,11 @@ message TextReadResponse
     TextEntity entity = 2; // 文本的实体
 }
 
-// 删除的请求
-message TextDeleteRequest
-{
-    string uuid = 1;
-}
-
-// 获取的请求
-message TextGetRequest
-{
-    string uuid = 1;
-}
-
 // 获取的回复
 message TextGetResponse
 {
     Status status = 1;     // 回复的状态
     TextEntity entity = 2; // 文本的实体
-}
-
-// 列举的请求
-message TextListRequest
-{
-    int64 offset = 1;
-    int64 count = 2;
 }
 
 // 列举的回复
@@ -79,7 +60,9 @@ message TextListResponse
 // 搜索的请求
 message TextSearchRequest
 {
-    string path = 1; // 路径
+    int64 offset = 1; // 偏移值
+    int64 count = 2;  // 数量
+    string path = 3;  // 路径
 }
 
 // 搜索的回复
