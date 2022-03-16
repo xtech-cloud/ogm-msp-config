@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+//package config;
+option go_package = "proto/config;config";
+
+// 状态
+message Status
+{
+    int32 code = 1;     // 状态码
+    string message = 2; // 状态信息
+}
+
+// uuid的回复
+message UuidResponse
+{
+    Status status = 1; // 状态
+    string uuid = 2;
+}
+
+// 文本的实体
+message TextEntity
+{
+    string uuid = 1;
+    string path = 2;
+    string content = 3;
+}
